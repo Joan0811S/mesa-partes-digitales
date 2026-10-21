@@ -130,5 +130,25 @@ namespace ExpedientesEP
             Console.WriteLine("Expediente registrado correctamente. Estado inicial: Recibido.");
             return cantidad;
         }
+        static void ListarExpedientes(
+            string[] codigos, string[] remitentes, string[] dnis,
+            string[] tiposDocumento, string[] asuntos, int[] folios,
+            string[] fechasHoras, string[] estados, int cantidad)
+        {
+            Console.WriteLine("\n--- EXPEDIENTES REGISTRADOS ---");
+
+            if (cantidad == 0)
+            {
+                Console.WriteLine("Todavía no hay expedientes registrados.");
+                return;
+            }
+
+            for (int i = 0; i < cantidad; i++)
+            {
+                Console.WriteLine("\nExpediente " + (i + 1));
+                MostrarExpediente(codigos, remitentes, dnis, tiposDocumento,
+                    asuntos, folios, fechasHoras, estados, i);
+            }
+        }
     }
 }
