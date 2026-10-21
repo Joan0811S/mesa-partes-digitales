@@ -213,5 +213,22 @@ static void BuscarExpediente(
             ListarExpedientes(codigos, remitentes, dnis, tiposDocumento,
                 asuntos, folios, fechasHoras, estados, cantidad);
         }
+        static void IntercambiarExpedientes(
+            string[] codigos, string[] remitentes, string[] dnis,
+            string[] tiposDocumento, string[] asuntos, int[] folios,
+            string[] fechasHoras, string[] estados, int p1, int p2)
+        {
+            string texto;
+            int numeroFolios;
+
+            texto = codigos[p1]; codigos[p1] = codigos[p2]; codigos[p2] = texto;
+            texto = remitentes[p1]; remitentes[p1] = remitentes[p2]; remitentes[p2] = texto;
+            texto = dnis[p1]; dnis[p1] = dnis[p2]; dnis[p2] = texto;
+            texto = tiposDocumento[p1]; tiposDocumento[p1] = tiposDocumento[p2]; tiposDocumento[p2] = texto;
+            texto = asuntos[p1]; asuntos[p1] = asuntos[p2]; asuntos[p2] = texto;
+            numeroFolios = folios[p1]; folios[p1] = folios[p2]; folios[p2] = numeroFolios;
+            texto = fechasHoras[p1]; fechasHoras[p1] = fechasHoras[p2]; fechasHoras[p2] = texto;
+            texto = estados[p1]; estados[p1] = estados[p2]; estados[p2] = texto;
+        }
     }
 }
