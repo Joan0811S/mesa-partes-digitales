@@ -173,6 +173,18 @@ static void BuscarExpediente(
                     asuntos, folios, fechasHoras, estados, posicion);
             }
         }
+        static int BuscarPosicion(string[] codigos, int cantidad, string codigo)
+        {
+            for (int i = 0; i < cantidad; i++)
+            {
+                if (codigos[i] != null && codigos[i].ToUpper() == codigo.Trim().ToUpper())
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
         }
     }
 }
