@@ -149,6 +149,30 @@ namespace ExpedientesEP
                 MostrarExpediente(codigos, remitentes, dnis, tiposDocumento,
                     asuntos, folios, fechasHoras, estados, i);
             }
+static void BuscarExpediente(
+            string[] codigos, string[] remitentes, string[] dnis,
+            string[] tiposDocumento, string[] asuntos, int[] folios,
+            string[] fechasHoras, string[] estados, int cantidad)
+        {
+            if (cantidad == 0)
+            {
+                Console.WriteLine("No hay expedientes para buscar.");
+                return;
+            }
+
+            string codigo = LeerTextoObligatorio("Ingrese el código que desea buscar: ").ToUpper();
+            int posicion = BuscarPosicion(codigos, cantidad, codigo);
+
+            if (posicion == -1)
+            {
+                Console.WriteLine("No se encontró un expediente con ese código.");
+            }
+            else
+            {
+                MostrarExpediente(codigos, remitentes, dnis, tiposDocumento,
+                    asuntos, folios, fechasHoras, estados, posicion);
+            }
+        }
         }
     }
 }
