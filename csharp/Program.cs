@@ -186,5 +186,32 @@ static void BuscarExpediente(
             return -1;
         }
         }
+        static void OrdenarExpedientes(
+            string[] codigos, string[] remitentes, string[] dnis,
+            string[] tiposDocumento, string[] asuntos, int[] folios,
+            string[] fechasHoras, string[] estados, int cantidad)
+        {
+            if (cantidad == 0)
+            {
+                Console.WriteLine("No hay expedientes para ordenar.");
+                return;
+            }
+
+            for (int i = 0; i < cantidad - 1; i++)
+            {
+                for (int j = 0; j < cantidad - 1 - i; j++)
+                {
+                    if (string.Compare(codigos[j], codigos[j + 1], StringComparison.OrdinalIgnoreCase) > 0)
+                    {
+                        IntercambiarExpedientes(codigos, remitentes, dnis,
+                            tiposDocumento, asuntos, folios, fechasHoras, estados, j, j + 1);
+                    }
+                }
+            }
+
+            Console.WriteLine("Expedientes ordenados por código.");
+            ListarExpedientes(codigos, remitentes, dnis, tiposDocumento,
+                asuntos, folios, fechasHoras, estados, cantidad);
+        }
     }
 }
