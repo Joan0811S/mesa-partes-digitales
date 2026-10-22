@@ -218,8 +218,8 @@ SubProceso MostrarExpediente(codigos, remitentes, dnis, tiposDocumento, asuntos,
 	Escribir "Remitente/institucion: ", remitentes[posicion]
 	Escribir "DNI: ", dnis[posicion]
 	Escribir "Tipo de documento: ", tiposDocumento[posicion]
-	Escribir "Asunto: ", asuntos[posicion]
-	Escribir "Numero de folios: ", folios[posicion]
+	Escribir "Asunto/problema: ", asuntos[posicion]
+	Escribir "Cantidad de hojas numeradas de un expediente : ", folios[posicion]
 	Escribir "Fecha y hora de recepcion: ", fechasHoras[posicion]
 	Escribir "Estado: ", estados[posicion]
 FinSubProceso
@@ -259,10 +259,10 @@ SubProceso respuesta <- LeerRespuestaSN(mensaje)
 
 	Repetir
 		respuesta <- Mayusculas(LeerTextoObligatorio(mensaje))
-		Si respuesta <> "S" Y respuesta <> "N" Entonces
-			Escribir "Responda solamente S o N."
+		Si respuesta <> "Si" Y respuesta <> "N0" Entonces
+			Escribir "Responda solamente Si o No."
 		FinSi
-	Hasta Que respuesta = "S" O respuesta = "N"
+	Hasta Que respuesta = "Si" O respuesta = "No"
 FinSubProceso
 
 SubProceso dni <- LeerDNI
