@@ -22,7 +22,7 @@ namespace ExpedientesEP
 
             do
             {
-                Console.WriteLine("\n===== REGISTRO DE EXPEDIENTES - AVANCE EP =====");
+                Console.WriteLine("===== REGISTRO DE EXPEDIENTES =====");
                 Console.WriteLine("1. Registrar expediente");
                 Console.WriteLine("2. Listar expedientes");
                 Console.WriteLine("3. Buscar expediente por código");
@@ -68,7 +68,7 @@ namespace ExpedientesEP
                 return cantidad;
             }
 
-            Console.WriteLine("\n--- REGISTRO DE EXPEDIENTE ---");
+            Console.WriteLine("--- REGISTRO DE EXPEDIENTE ---");
             string respuesta = LeerRespuestaSN("¿El documento ya tiene número de expediente? (Si/No): ");
             string codigo;
 
@@ -136,7 +136,7 @@ namespace ExpedientesEP
             string[] tiposDocumento, string[] asuntos, int[] folios,
             string[] fechasHoras, string[] estados, int cantidad)
         {
-            Console.WriteLine("\n--- EXPEDIENTES REGISTRADOS ---");
+            Console.WriteLine("--- EXPEDIENTES REGISTRADOS ---");
 
             if (cantidad == 0)
             {
@@ -146,7 +146,7 @@ namespace ExpedientesEP
 
             for (int i = 0; i < cantidad; i++)
             {
-                Console.WriteLine("\nExpediente " + (i + 1));
+                Console.WriteLine("Expediente " + (i + 1));
                 MostrarExpediente(codigos, remitentes, dnis, tiposDocumento,
                     asuntos, folios, fechasHoras, estados, i);
             }
