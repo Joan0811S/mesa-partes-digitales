@@ -1,107 +1,72 @@
-# Registro de Expedientes - Avance EP
+# Mesa de Partes Digital — Grupo 9
 
-Prototipo de consola para una **mesa de partes digital**, desarrollado para el curso **Fundamentos de Programación (CIIN1205P)** dentro del proyecto *"Del archivador al algoritmo: un prototipo para la mesa de partes digital"*. El caso observado es la Mesa de Partes de la Municipalidad Distrital de Santiago de Cao.
+Proyecto de consola en C# y pseudocódigo PSeInt para registrar, validar, buscar, ordenar y almacenar expedientes usando ocho arreglos paralelos.
 
-Esta es la versión de **avance (EP)**: registra, lista, busca y ordena expedientes en memoria, usando arreglos paralelos y validaciones con cadenas.
+## Estructura del proyecto C#
 
-## Integrantes
+```text
+csharp/
+├── Program.cs
+├── clsExpedientes.cs
+├── clsValidaciones.cs
+├── clsArchivos.cs
+└── csharp.csproj
+```
 
-- Baltazar Mosqueira Nicolas
-- Garcia Amaya Joan
-- Joaquin Esteban Emanuel
-- Lozano Ayala Dared
-- Saravia Cordova Dereck
+- `Program.cs`: contiene `Main`, declara los ocho arreglos paralelos y presenta el menú.
+- `clsExpedientes.cs`: contiene el registro, listado, búsqueda secuencial, ordenamiento Burbuja y presentación de expedientes.
+- `clsValidaciones.cs`: contiene las funciones para leer y validar textos, respuestas S/N, DNI, números y fecha/hora.
+- `clsArchivos.cs`: contiene `GuardarExpedientes` y `CargarExpedientes`, que realizan la persistencia secuencial.
+- No se crea una clase `Expediente`: los campos se mantienen en los ocho arreglos paralelos definidos para el proyecto.
 
-## Funcionalidades
+## Requisitos
 
-| Opción | Descripción |
-|--------|-------------|
-| 1 | Registrar expediente |
-| 2 | Listar expedientes |
-| 3 | Buscar expediente por código |
-| 4 | Ordenar expedientes por código |
-| 0 | Salir |
+- .NET 10 SDK
+- Visual Studio con soporte para .NET 10 o terminal con `dotnet`
 
-### Datos que se guardan por expediente
+## Ejecución
 
-- Código (formato `EXP001`, `EXP045`, `EXP120`)
-- Remitente o institución
-- DNI (8 dígitos, o "No corresponde" si el remitente no es persona natural)
-- Tipo de documento o trámite
-- Asunto
-- Número de folios
-- Fecha y hora de recepción (`dd/MM/aaaa HH:mm`)
-- Estado (inicia siempre como `Recibido`)
-
-### Registro de un expediente
-
-1. El programa pregunta si el documento **ya tiene número de expediente**.
-   - **Sí:** el usuario lo escribe y se valida que no esté duplicado.
-   - **No:** el programa genera el siguiente código disponible (`EXPnnn`).
-2. Se piden remitente, si es persona natural (y DNI en ese caso), tipo de documento, asunto, folios y fecha y hora.
-3. El expediente se guarda con estado `Recibido`.
-
-## Validaciones
-
-- Los campos de texto son obligatorios (no se aceptan vacíos ni solo espacios).
-- Las respuestas Sí/No solo aceptan `S` o `N`.
-- El DNI debe tener exactamente 8 dígitos.
-- Los folios deben ser un entero mayor que cero.
-- El menú solo acepta números dentro del rango de opciones.
-- La fecha y hora se valida por formato, rangos de mes, hora y minuto, y **días reales del mes** (incluye años bisiestos).
-- No se permiten códigos de expediente duplicados.
-- Se controla la capacidad máxima de **100 expedientes**.
-
-## Técnicas aplicadas
-
-- **Arreglos paralelos** (uno por campo) con una variable `cantidad` que indica cuántos registros hay.
-- **Búsqueda secuencial** por código, sin distinguir mayúsculas de minúsculas.
-- **Ordenamiento burbuja** por código, intercambiando todos los campos del expediente.
-- **Modularidad:** cada tarea está en su propio subproceso o método (registrar, listar, buscar, ordenar, validar, leer datos).
-- **Validación con cadenas:** recorrido carácter por carácter para comprobar dígitos, formato de fecha y recorte de espacios.
-
-## Estructura del programa
-
-| Módulo | Función |
-|--------|---------|
-| `RegistrarExpediente` | Captura y guarda un expediente nuevo |
-| `ListarExpedientes` | Muestra todos los expedientes |
-| `BuscarExpediente` / `BuscarPosicion` | Búsqueda secuencial por código |
-| `OrdenarExpedientes` / `IntercambiarExpedientes` | Ordenamiento burbuja por código |
-| `MostrarExpediente` | Imprime los datos de un expediente |
-| `GenerarCodigo` | Genera códigos con formato `EXPnnn` |
-| `LeerTextoObligatorio`, `LeerRespuestaSN`, `LeerDNI`, `LeerEnteroPositivo`, `LeerEnteroEnRango`, `LeerFechaHora` | Lectura con validación |
-| `FechaHoraValida`, `EsSoloDigitos`, `Recortar` | Validaciones y utilidades de cadenas |
-
-El diseño en pseudocódigo está en `ExpedientesEP.psc` (PSeInt) y cada subproceso corresponde a un método estático del programa en C# (`Program.cs`).
-
-## Cómo ejecutarlo
-
-### Versión C# (Visual Studio)
-
-1. Abre la solución del proyecto en Visual Studio.
-2. Ejecuta con `F5` (o `Ctrl + F5` para que la consola no se cierre).
-
-También se puede ejecutar desde la terminal, dentro de la carpeta del proyecto:
+Desde la carpeta `csharp`:
 
 ```bash
 dotnet run
 ```
 
-### Versión pseudocódigo (PSeInt)
+## Opciones del menú
 
-1. Abre `ExpedientesEP.psc` en PSeInt.
-2. Pulsa **Ejecutar**.
+1. Registrar expediente
+2. Listar expedientes
+3. Buscar expediente por código
+4. Ordenar expedientes por código
+5. Guardar expedientes en archivo
+6. Cargar expedientes desde archivo
+0. Salir
 
-> Nota: PSeInt trabaja con arreglos en base 1, mientras que C# lo hace en base 0.
+La opción 5 crea o reemplaza `expedientes.txt` en el directorio de trabajo, escribiendo ocho líneas por cada expediente. La opción 6 lee el archivo, valida los registros y solicita confirmación porque reemplaza los arreglos que están actualmente en memoria. El programa no guarda automáticamente al salir.
 
-## Limitaciones del avance EP
+## Archivo de datos
 
-- Los datos solo viven **en memoria**: al cerrar el programa se pierden.
-- Capacidad fija de 100 expedientes.
-- El estado siempre inicia en `Recibido` y aún no se puede cambiar.
+`expedientes.txt` es un archivo de texto secuencial y no debe publicarse cuando contenga datos personales reales. Para pruebas y sustentación se deben usar datos ficticios o anonimizados. El archivo está excluido del control de versiones mediante `.gitignore`.
 
-## Próximos pasos (EF)
+## Pseudocódigo
+
+`ExpedientesEP.psc` contiene el algoritmo principal y los subprocesos equivalentes a las responsabilidades de las clases C#. PSeInt utiliza subprocesos para la modularidad; no se divide en clases como C#.
+
+## Publicación en GitHub
+
+Agregar o actualizar estos elementos en el repositorio:
+
+- `csharp/Program.cs` (actualizado)
+- `csharp/clsExpedientes.cs` (nuevo)
+- `csharp/clsValidaciones.cs` (nuevo)
+- `csharp/clsArchivos.cs` (nuevo)
+- `csharp/csharp.csproj` (conservar)
+- `ExpedientesEP.psc` (actualizado)
+- `README.md` (actualizado)
+- `.gitignore` (nuevo o actualizado)
+
+No subir carpetas `bin`, `obj`, `.vs` ni el archivo `expedientes.txt`.
+
 
 - Búsqueda binaria sobre los expedientes ordenados.
 - Función recursiva.
