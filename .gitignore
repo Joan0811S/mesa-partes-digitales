@@ -1,4 +1,7 @@
-bin/
-obj/
-.vscode
-*.log
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+expedientes.txt
+csharp/expedientes.txt
